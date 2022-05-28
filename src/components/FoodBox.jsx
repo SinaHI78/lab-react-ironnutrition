@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import React from 'react';
-import data from '../foods.json';
 
-function FoodBox() {
-  const [foods, setFoods] = useState(data);
-
+function FoodBox(props) {
   return (
     <>
-      {foods.map((food) => {
+      {props.foods.map((food) => {
         return (
           <div className="box">
             <article className="media">

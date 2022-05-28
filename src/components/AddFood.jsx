@@ -1,17 +1,68 @@
-/* import { useState } from 'react';
+import { useState } from 'react';
+import React from 'react';
 
-const AddFood = () => {
-  //const [foods, setFoods] = useState(data);
+const AddFood = (props) => {
+  const [displayForm, setDisplayForm] = useState(false);
+  // const [newFood, setNewFood] = useState({});
+  const [name, setName] = useState('');
+  const [calories, setCalories] = useState(0);
+  const [image, setImage] = useState('');
+
+  const handleNameChange = (event) => {
+    const value = event.target.value;
+    setName(value);
+  };
+
+  const handleCaloriesChange = (event) => {
+    const value = event.target.value;
+    setCalories(value);
+  };
+
+  const handleImageChange = (event) => {
+    const value = event.target.value;
+    setImage(value);
+  };
+
+  const handleFormSubmission = (event) => {
+    event.preventDefault();
+    props.addFoodFunction({ name, calories, image });
+    alert('User submitted form with new food');
+  };
+
+  const handleDisplay = (event) => {
+    event.preventDefault();
+    setDisplayForm(!displayForm);
+  };
 
   return (
-    <form onSubmit={handleFormSubmission}>
-      <h1>Add food</h1>
-      <input type="text" placeholder="Name" />
-      <input type="text" placeholder="Calories" />
-      <input type="text" placeholder="" />
-    </form>
+    <>
+      {displayForm === true ? (
+        <div>
+          <form onSubmit={handleFormSubmission}>
+            <input
+              value={name}
+              placeholder="Name"
+              onChange={handleNameChange}
+            />
+            <input
+              value={calories}
+              placeholder="Calories"
+              onChange={handleCaloriesChange}
+            />
+            <input
+              value={image}
+              placeholder="Image"
+              onChange={handleImageChange}
+            />
+            <button>Add New Food</button>
+          </form>
+        </div>
+      ) : (
+        <p>It is hidden</p>
+      )}
+      <button onClick={handleDisplay}>Show Form</button>
+    </>
   );
 };
 
 export default AddFood;
- */
