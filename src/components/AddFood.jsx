@@ -58,7 +58,7 @@ const AddFood = (props) => {
           </form>
         </div>
       ) : (
-        <p>It is hidden</p>
+        ''
       )}
       <button onClick={handleDisplay}>Show Form</button>
     </>
