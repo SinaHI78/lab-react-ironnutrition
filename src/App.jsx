@@ -3,12 +3,14 @@ import { useState } from 'react';
 import './App.css';
 import 'bulma/css/bulma.css';
 import data from './foods.json';
-import FoodBox from './components/FoodBox';
+import FoodBoxList from './components/FoodBoxList';
 import AddFood from './components/AddFood';
 import SearchBar from './components/SearchBar';
+import TodaysFoods from './components/TodaysFoods';
 
 function App() {
   const [foodsArr, setFoodsArr] = useState(data);
+  const [todaysFood, setTodaysFood] = useState([]);
 
   const updateFoodArr = (newFood) => {
     setFoodsArr([...foodsArr, newFood]);
@@ -22,14 +24,24 @@ function App() {
     );
   };
 
+  const addToTodaysFood = (food) => {
+    console.log(food);
+    setTodaysFood([...todaysFood, food]);
+  };
+
   return (
     <div className="App">
       <h1>
         <strong>IronNutrition</strong>
       </h1>
       <SearchBar changeHandler={filterByName} />
-      <AddFood addFoodFunction={updateFoodArr} />
-      <FoodBox foods={foodsArr} />
+      <div className="food">
+        <AddFood addFoodFunction={updateFoodArr} />
+        <FoodBoxList foods={foodsArr} addFood={addToTodaysFood} />
+      </div>
+      <div className="list">
+        <TodaysFoods foods={todaysFood} />
+      </div>
     </div>
   );
 }
